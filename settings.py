@@ -11,7 +11,7 @@ class Settings():
 		self.bullet_allowed = 10
 		self.alien_speed_factor = 1
 		self.fleet_drop_speed = 10
-		self.ship_limit = 1
+		self.ship_limit = 3
 		self.score_scale = 1.5
 		self.alien_points = 50
 		self.speed_up_scale = 1.1

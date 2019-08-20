@@ -1,4 +1,6 @@
 import pygame.font
+from pygame.sprite import Group
+from ship import Ship
 
 class Scoreboard():
     def __init__(self, ai_settings, screen, stats):
@@ -13,6 +15,7 @@ class Scoreboard():
         self.pre_score()
         self.pre_high_score()
         self.pre_level()
+        self.pre_ships()
 
     def pre_score(self):
         rounded_score = round(self.stats.score, -1)
@@ -36,6 +39,13 @@ class Scoreboard():
         self.level_image_rect.right = self.screen_rect.right - 20
         self.level_image_rect.top = 60
 
+    def pre_ships(self):
+        self.ships = Group()
+        for ship_number in range(self.stats.ship_left):
+            ship = Ship(self.screen, self.ai_settings)
+            ship.rect.x = 10 + ship_number * ship.rect.width
+            ship.rect.y =  10
+            self.ships.add(ship)
 
     def check_high_score(self):
         if self.stats.score > self.stats.high_score:
@@ -46,3 +56,4 @@ class Scoreboard():
         self.screen.blit(self.score_image, self.score_rect)
         self.screen.blit(self.high_score_image, self.high_score_rect)
         self.screen.blit(self.level_image, self.level_image_rect)
+        self.ships.draw(self.screen)
